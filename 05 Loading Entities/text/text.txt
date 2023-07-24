@@ -1,0 +1,35 @@
+We have provided some example entity files for you to use in your project.
+Firstly there is a <a href="resources/cw-stag/config/basic-entities.dot" target="_blank">basic entities file</a>
+to help get you started in constructing your game engine.
+We have also provided an <a href="resources/cw-stag/config/extended-entities.dot" target="_blank">extended entities file</a>
+that can be used for more extensive testing during the later stages of your work.
+
+You already have much experience of writing parsers from previous exercises (both on this unit and others).
+We don't really want to cover old ground, so for this assignment you will NOT be required to build your own parser.
+Instead, you are able to use existing parsing libraries for reading in the configuration files.
+There is considerable educational value in learning to use existing libraries and frameworks in this way.
+
+With this in mind, you should use the
+<a href="http://www.alexander-merz.com/graphviz/doc/com/alexmerz/graphviz/Parser.html" target="_blank">JPGD parser</a>
+in order to parse the entity DOT files. Use this library to extract a set of 
+<a href="http://www.alexander-merz.com/graphviz/doc/com/alexmerz/graphviz/objects/package-summary.html" target="_blank">GraphViz Objects</a>
+and then store them in a suitable data structure so that your server can access them.
+We have provided you with an abstract `GameEntity` class in the maven project that you should use to represent entities within your game.
+You should write a number of concrete subclasses that inherit from this abstract class to represent specific types of entity.
+
+All entities will need at least a name and a description, some may need additional attributes as well.
+To make things easier, entity names cannot contain spaces (the DOT parser doesn't like it if they do !).
+It is also worth mentioning that entity names defined in the configuration files will be unique.
+Additionally, there should only be a single instance of each entity within the game.
+You won't have to deal with two things called `door` (although your might see a `blue_door` and a `red_door`).
+As such, you can safely use entity names as unique identifiers.
+
+Every game has a "special" location that is the starting point for an adventure.
+The start location can be called anything we like, however it will _always_ be the **first** location
+that appears in the "entities" file.
+
+There is another special location called `storeroom` that can be found in the entities file.
+This location does not appear in the game world (there will be no paths to/from it).
+The `storeroom` is a container for all of the entities that have no initial location in the game.
+Everything needs to exist somewhere in the game structure (so that they can be defined in the entities file).
+These entities will not enter the game until an action places them into another location within the game.
